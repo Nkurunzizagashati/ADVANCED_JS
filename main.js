@@ -1,25 +1,27 @@
-// FUNCTION CURRYING
+// call() method
 
-// there are two ways to implement function currying in JavaScript:
-// 1. Using bind() method
-// 2. Using closures
+const obj = {
+  name: 'John',
+  age: 30,
+};
 
-// 1. Using bind() method
-
-const multiply = (a, b) => a * b;
-
-const multiplyByTwo = multiply.bind(null, 2); // curried function
-console.log(multiplyByTwo(5)); // outputs: 10
-
-const multiplyByThree = multiply.bind(null, 3); // curried function
-console.log(multiplyByThree(5)); // outputs: 15
-
-// 2. Using closures
-
-function multiplyBy(a) {
-  return function (b) {
-    return a * b;
-  };
+function callName(country, city) {
+  console.log(
+    `Iam : ${this.name}, I am ${this.age} years old, I am from ${country}`
+  ); // Outputs: John
 }
 
-console.log(multiplyBy(2)(5)); // outputs: 10)
+// method rendering
+
+callName.call(obj, 'Rwanda', 'Kigali'); // Outputs: I am John, I am 30 years old, I am from Rwanda
+
+// apply() method
+
+callName.apply(obj, ['Rwanda', 'Kigali']); // Outputs: I am John, I am 30 years old, I am from Rwanda
+
+// bind() method
+// bind() method is similar to call() method but the difference is that bind method
+// .. returns a function that can be called later whereas call() method immediately calls the function
+
+const boundCallName = callName.bind(obj, 'Rwanda', 'Kigali');
+boundCallName(); // Outputs: I am John, I am 30 years old, I am from Rwanda
