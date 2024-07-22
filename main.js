@@ -1,52 +1,15 @@
-// ====================================
-// SCOPING
-// ====================================
+// FUNCTION CURRYING
 
-// function outer() {
-//     let counter = 0;
+// there are two ways to implement function currying in JavaScript:
+// 1. Using bind() method
+// 2. Using closures
 
-//     function inner() {
-//         counter  ++;
-//         console.log(counter)
-//     }
+// 1. Using bind() method
 
-//     inner();
+const multiply = (a, b) => a * b;
 
-//     console.log(counter)
-// }
+const multiplyByTwo = multiply.bind(null, 2); // curried function
+console.log(multiplyByTwo(5)); // outputs: 10
 
-// outer()
-
-// ===========================================
-// CLOSURES IN JS
-// we can return a function inside a function
-// ===========================================
-
-function outerFunction() {
-  let counter = 0;
-
-  function innerFunction() {
-    counter++;
-    console.log(counter);
-  }
-
-  function innerFunction2() {
-    counter++;
-    console.log(counter);
-  }
-  function innerFunction3() {
-    innerFunction();
-    innerFunction2();
-  }
-
-  return innerFunction3; // returning innerFunction3 instead of innerFunction2 to demonstrate closure
-}
-
-// The variable defined in the outer function when
-// .. being referenced by the function defined in the outer function (this is when closure happens)
-// ... is stored in the heap and will be remembered.
-
-let myFunction = outerFunction();
-
-myFunction(); // logs 1, 2
-myFunction(); // logs 3, 4
+const multiplyByThree = multiply.bind(null, 3); // curried function
+console.log(multiplyByThree(5)); // outputs: 15
