@@ -1,27 +1,17 @@
-// call() method
+// PROTOTYPAL INHERITANCE
 
-const obj = {
-  name: 'John',
-  age: 30,
-};
-
-function callName(country, city) {
-  console.log(
-    `Iam : ${this.name}, I am ${this.age} years old, I am from ${country}`
-  ); // Outputs: John
+function Person(fName, lName) {
+  this.firstName = fName;
+  this.lastName = lName;
 }
 
-// method rendering
+Person.prototype.getFullName = function () {
+  return `${this.firstName} ${this.lastName}`;
+};
 
-callName.call(obj, 'Rwanda', 'Kigali'); // Outputs: I am John, I am 30 years old, I am from Rwanda
+const person1 = new Person('John', 'Doe');
+const person2 = new Person('Jane', 'Smith');
 
-// apply() method
+console.log(person1.getFullName()); // Output: John Doe
 
-callName.apply(obj, ['Rwanda', 'Kigali']); // Outputs: I am John, I am 30 years old, I am from Rwanda
-
-// bind() method
-// bind() method is similar to call() method but the difference is that bind method
-// .. returns a function that can be called later whereas call() method immediately calls the function
-
-const boundCallName = callName.bind(obj, 'Rwanda', 'Kigali');
-boundCallName(); // Outputs: I am John, I am 30 years old, I am from Rwanda
+console.log(person2.getFullName()); // Output: Jane Smith
