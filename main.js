@@ -1,52 +1,17 @@
-// ====================================
-// SCOPING
-// ====================================
+// PROTOTYPAL INHERITANCE
 
-// function outer() {
-//     let counter = 0;
-
-//     function inner() {
-//         counter  ++;
-//         console.log(counter)
-//     }
-
-//     inner();
-
-//     console.log(counter)
-// }
-
-// outer()
-
-// ===========================================
-// CLOSURES IN JS
-// we can return a function inside a function
-// ===========================================
-
-function outerFunction() {
-  let counter = 0;
-
-  function innerFunction() {
-    counter++;
-    console.log(counter);
-  }
-
-  function innerFunction2() {
-    counter++;
-    console.log(counter);
-  }
-  function innerFunction3() {
-    innerFunction();
-    innerFunction2();
-  }
-
-  return innerFunction3; // returning innerFunction3 instead of innerFunction2 to demonstrate closure
+function Person(fName, lName) {
+  this.firstName = fName;
+  this.lastName = lName;
 }
 
-// The variable defined in the outer function when
-// .. being referenced by the function defined in the outer function (this is when closure happens)
-// ... is stored in the heap and will be remembered.
+Person.prototype.getFullName = function () {
+  return `${this.firstName} ${this.lastName}`;
+};
 
-let myFunction = outerFunction();
+const person1 = new Person('John', 'Doe');
+const person2 = new Person('Jane', 'Smith');
 
-myFunction(); // logs 1, 2
-myFunction(); // logs 3, 4
+console.log(person1.getFullName()); // Output: John Doe
+
+console.log(person2.getFullName()); // Output: Jane Smith
