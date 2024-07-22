@@ -13,3 +13,13 @@ console.log(multiplyByTwo(5)); // outputs: 10
 
 const multiplyByThree = multiply.bind(null, 3); // curried function
 console.log(multiplyByThree(5)); // outputs: 15
+
+// 2. Using closures
+
+function multiplyBy(a) {
+  return function (b) {
+    return a * b;
+  };
+}
+
+console.log(multiplyBy(2)(5)); // outputs: 10)
